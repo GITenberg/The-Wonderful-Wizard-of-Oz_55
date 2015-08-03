@@ -10,16 +10,16 @@ creator:
     agent_name: Baum, L. Frank (Lyman Frank)
     aliases:
     - Van Dyne, Edith
-    - Bancroft, Laura
     - Baum, Lyman Frank
+    - Bancroft, Laura
     birthdate: 1856
     deathdate: 1919
     gutenberg_agent_id: '42'
     url: http://www.gutenberg.org/2009/agents/42
     wikipedia: http://en.wikipedia.org/wiki/L._Frank_Baum
 gutenberg_bookshelf:
-- Children's Literature
 - Fantasy
+- Children's Literature
 gutenberg_issued: '1993-02-01'
 gutenberg_type: Text
 identifiers:
@@ -29,9 +29,9 @@ publisher: Project Gutenberg
 rights: Public domain in the USA.
 rights_url: http://creativecommons.org/about/pdm
 subjects:
-- '!lcsh:Oz (Imaginary place) -- Fiction'
-- '!lcc:PZ'
-- '!lcc:PS'
-- '!lcsh:Fantasy'
+- '!lcc: PZ'
+- '!lcc: PS'
+- '!lcsh: Oz (Imaginary place) -- Fiction'
+- '!lcsh: Fantasy'
 title: The Wonderful Wizard of Oz
 url: http://www.gutenberg.org/ebooks/55
