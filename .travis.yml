@@ -1,0 +1,32 @@
+language: ruby
+before_install:
+- gem install asciidoctor tilt
+script:
+- VERSION=`ruby -e "require 'yaml'; meta = YAML.load_file('metadata.yaml'); puts meta['_version'];"`
+- git clone https://github.com/gitenberg-dev/asciidoctor-htmlbook.git
+- asciidoctor -a toc,version=$VERSION -b xhtml5 -T ./asciidoctor-htmlbook/htmlbook-autogen/
+  -d book book.asciidoc -o book.html
+- git clone https://github.com/gitenberg-dev/HTMLBook
+- xsltproc -stringparam external.assets.list " " ./HTMLBook/htmlbook-xsl/epub.xsl book.html
+- cp ./HTMLBook/stylesheets/epub/epub.css OEBPS
+- cp cover.jpg OEBPS/cover.jpg
+- if test -d "./images"; then mv ./images ./OEBPS/ ;fi
+- zip -rX book.epub mimetype
+- zip -rX book.epub OEBPS/ META-INF/
+- if test -d "OEBPS/images/"; then zip -rX book.epub OEBPS/images/ ;fi 
+- mv book.epub The-Wonderful-Wizard-of-Oz.epub
+branches:
+  only:
+  - master
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: f/uIEU2W0s7TJOjzEnUO1FHPCjuC8ZJwEs9nXiwiwkugwMD7gzK8RWx4iE1HilzISdyMsRRIX+L8VB0bkMDNd98Q8b/KF2YFa2ZLkLZAGaQ5wWnVYGfLwgwrJdKZfx4kAzcSosl6y6LHFgzYdP1HcZMvjOhS9ummf2p0p6ytFrlDCBFNA1cvNlWKuUiNQPUXQCcUdOvjMkdhFOEpDqHyrIYuFuHg9WOaDJwlV/Onysf1hlvNWVLur1g55ZoX7xayMJDXUc1K5DjvnERn0qulMFknZQHKm5Py+eG0vGngxz/caniYENQPYcgwJXtvGpwsf0Uo0rTIsQ5lyxIXthKx1FOBgGV2AUwJ3LWTutxlXcUxNYYkqDtC4WEo678WSlypT6AWDKPVJYP5G8ZQpjrtnr4FzuZx1sPvIMTXGXD1rY18F2Qr7qYFIdB0ieczjzdsK9gtM4vZ3jOmR4JFiX953HqAJ5GJvQLAF656P2VcDhSB9guePEzZO+hzMkRmAtpxh73tL1hbmRBnYczc7Ij0+IEdJzwyS6fpJnbsQ/hw50l16gZuN10Vp04MGENBHpiEfTvqhOPvuS2aMGM3BiUSoFsglxANZaEj66cWdiW5Q7gHxjxKhBf7Ldr8AIJE1Up7jsMwrRWej6EhnUE+OCUeyXGw62PjvusY6drWqvhzTkk=
+  file: The-Wonderful-Wizard-of-Oz.epub
+  "on":
+    repo: GITenberg/The-Wonderful-Wizard-of-Oz_55
+addons:
+  apt:
+    packages:
+    - xsltproc
