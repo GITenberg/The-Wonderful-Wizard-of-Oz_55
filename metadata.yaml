@@ -1,5 +1,5 @@
 _repo: The-Wonderful-Wizard-of-Oz_55
-_version: 0.0.2
+_version: 0.1.0
 covers:
 - attribution: David Hays, 2015
   cover_type: original
@@ -35,5 +35,6 @@ subjects:
 - '!lcc: PS'
 - '!lcsh: Oz (Imaginary place) -- Fiction'
 - '!lcsh: Fantasy'
+- GITenberg
 title: The Wonderful Wizard of Oz
 url: http://www.gutenberg.org/ebooks/55
